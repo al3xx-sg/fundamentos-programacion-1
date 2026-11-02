@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class envio_paquete {
+
+    public static void mostrarEtiqueta(String guia, String destino, double peso) {
+        System.out.println("ETIQUETA");
+        System.out.println("Numero de guia: " +guia);
+        System.out.println("Ciudad de destino: " +destino);
+        System.out.println("Peso del paquete: " +peso +" kg");
+    }
+// CADA VEZ MAS CERCA DE POO :C
+
+    public static void main(String[] args) {
+        Scanner teclado = new Scanner(System.in);
+
+        System.out.print("Ingresa el numero de guia del paquete 1: ");
+        String guia1 = teclado.nextLine();
+
+        System.out.print("Ingresa la ciudad de destino: ");
+        String destino1 = teclado.nextLine();
+        System.out.print("Ingresa el peso del paquete en kg: ");
+        double peso1 = teclado.nextDouble();
+        teclado.nextLine();
+        System.out.print("Ingresa el numero de guia del paquete 2: ");
+        String guia2 = teclado.nextLine();
+        System.out.print("Ingresa la ciudad de destino: ");
+        String destino2 = teclado.nextLine();
+        System.out.print("Ingresa el peso del paquete en kg: ");
+        double peso2 = teclado.nextDouble();
+
+        System.out.println();
+
+        mostrarEtiqueta(guia1, destino1, peso1);
+        mostrarEtiqueta(guia2, destino2, peso2);
+    }
+}
