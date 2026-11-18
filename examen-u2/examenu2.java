@@ -21,10 +21,9 @@ public class Main {
 
         do {
 
-            System.out.println("\nIngrese el peso del paquete en kg (0 termina):");
+            System.out.println("\n\nIngrese el peso del paquete en kg (0 termina):");
             peso = teclado.nextInt();
 
-            // Terminar el registro
             if (peso == 0) {
                 break;
             }
@@ -78,7 +77,7 @@ public class Main {
                     break;
             }
 
-            // Comprobar limite de peso
+            // Compruebo ohsiohsi
             if (peso > limite) {
 
                 System.out.println("Paquete rechazado.");
@@ -86,7 +85,6 @@ public class Main {
 
             } else {
 
-                // Preguntar si es fragil
                 do {
                     System.out.println("¿El paquete es fragil?");
                     System.out.println("1.- Si");
@@ -111,7 +109,7 @@ public class Main {
                     costoM = precio;
                 }
 
-                System.out.println("\n--- RESULTADO DEL PAQUETE ---");
+                System.out.println("\n\nRESULTADOS");
                 System.out.println("Tipo de envio: " + tipo);
                 System.out.println("Peso: " + peso + " kg");
                 System.out.println("Total a pagar: $" + df.format(precio));
