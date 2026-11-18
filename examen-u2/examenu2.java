@@ -101,7 +101,7 @@ public class Main {
                 aceptados++;
                 total += precio;
 
-                if (precio > costoMayor) {
+                if (precio > costoM) {
                     costoM = precio;
                 }
 
