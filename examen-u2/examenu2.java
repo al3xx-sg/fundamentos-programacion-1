@@ -1,75 +1,131 @@
-import java.text.DecimalFormat;
+
 import java.util.Scanner;
-public class examenu2{
+import java.text.DecimalFormat;
+
+public class Main {
     public static void main(String[] args) {
+
         Scanner teclado = new Scanner(System.in);
         DecimalFormat df = new DecimalFormat("#.##");
 
-        double pesoL=0.0, pesoN=0.0, pesoE=0.0;
-        int rechazos=0, res=0, fragil=0, opc=0;
-        double aceptadoL=0.0, aceptadoN=0.0, aceptadoE=0.0;
-        double peso=0.0;
+        int peso = 0, opc = 0, res = 0;
+        int aceptados = 0, rechazos = 0, fragil = 0;
 
-        System.out.println("---SISTEMA DE PAQUETES---");
+        double precio = 0, total = 0;
+        double costoM = 0;
 
-        do{
-            System.out.println("Ingrese el peso del paquete en kg (0 termina el programa, no se valen valores negativos)");
-            peso=teclado.nextDouble();
+        int limite = 0;
+        String tipo = "";
 
-            System.out.println("Ingrese el tipo de envio");
-            System.out.println("1.- Local");
-            System.out.println("2.- Nacional");
-            System.out.println("1.- Express");
-            opc=teclado.nextInt();
-            switch (opc) {
-                case 1:
-                    if (peso>12){
-                        aceptadoL=30+8*peso;
-                    }
-                    break;
-                case 2:
-                    if (peso>20) {
-                        aceptadoN=50+12*peso;
-                    }
-                    break;
-                case 3:
-                    if (peso>5) {
-                        aceptadoE=80+20*peso;
-                    }
-                    break;        
-                default:
-                    System.out.println("Invalido");
+        System.out.println("SISTEMA DE PAQUETES");
+
+        do {
+
+            System.out.println("\nIngrese el peso del paquete en kg (0 termina):");
+            peso = teclado.nextInt();
+
+            // Terminar el registro
+            if (peso == 0) {
+                break;
             }
-            for (int i = 1; i < 3; i++) {
+
+          
+            while (peso < 0) {
+                System.out.println("Peso invalido. Ingrese nuevamente:");
+                peso = teclado.nextInt();
+
+                if (peso == 0) {
+                    break;
+                }
+            }
+
+            if (peso == 0) {
+                break;
+            }
+
+            do {
+                System.out.println("\n\nSeleccione el tipo de envio:");
                 System.out.println("1.- Local");
                 System.out.println("2.- Nacional");
                 System.out.println("3.- Express");
-                System.out.println("Su paquete "+i+" es fragil?");
-                System.out.println("1.- SI");
-                System.out.println("2.- NO");
-                res=teclado.nextInt();
-                if (res==1 && i==1) {
-                    aceptadoL+=25;
-                    fragil+=1;
-                }else if (res==2 && i==2){
-                    aceptadoN+=25;
-                    fragil+=1;
-                }else if (res==3 && i==3){
-                    aceptadoE+=25;
-                    fragil+=1;
-                }
-            }
-        }while(peso==0); 
+                opc = teclado.nextInt();
 
-        System.out.println("--------------");
-        System.out.println("--------------");
-        System.out.println("--------------");
-        System.out.println("--------------");
-        double tot=0;
-        tot=aceptadoE+aceptadoL+aceptadoN;
-        System.out.println("Resultado de paquetes: ");
-        System.out.println("Reachazados: "+rechazos);
-        System.out.println("Fragiles: "+fragil);
-        System.out.println("El total recaudado fue de: "+df.format(tot));
+                if (opc < 1 || opc > 3) {
+                    System.out.println("Opcion invalida. Intente nuevamente.");
+                }
+
+            } while (opc < 1 || opc > 3);
+
+            // Fckin limite ahh
+            switch (opc) {
+
+                case 1:
+                    tipo = "Local";
+                    limite = 12;
+                    precio = 30 + 8 * peso;
+                    break;
+
+                case 2:
+                    tipo = "Nacional";
+                    limite = 20;
+                    precio = 50 + 12 * peso;
+                    break;
+
+                case 3:
+                    tipo = "Express";
+                    limite = 5;
+                    precio = 80 + 20 * peso;
+                    break;
+            }
+
+            // Comprobar limite de peso
+            if (peso > limite) {
+
+                System.out.println("Paquete rechazado.");
+                rechazos++;
+
+            } else {
+
+                // Preguntar si es fragil
+                do {
+                    System.out.println("¿El paquete es fragil?");
+                    System.out.println("1.- Si");
+                    System.out.println("2.- No");
+                    res = teclado.nextInt();
+
+                    if (res != 1 && res != 2) {
+                        System.out.println("Opcion invalida.");
+                    }
+
+                } while (res != 1 && res != 2);
+
+                if (res == 1) {
+                    precio += 25;
+                    fragil++;
+                }
+
+                aceptados++;
+                total += precio;
+
+                if (precio > costoMayor) {
+                    costoM = precio;
+                }
+
+                System.out.println("\n--- RESULTADO DEL PAQUETE ---");
+                System.out.println("Tipo de envio: " + tipo);
+                System.out.println("Peso: " + peso + " kg");
+                System.out.println("Total a pagar: $" + df.format(precio));
+            }
+
+        } while (peso != 0);
+
+        System.out.println("\n\nRESULTADOS FINALES");
+        System.out.println("Paquetes aceptados: " + aceptados);
+        System.out.println("Paquetes rechazados: " + rechazos);
+        System.out.println("Paquetes fragiles aceptados: " + fragil);
+        System.out.println("Dinero recaudado: $" + df.format(total));
+        System.out.println("Costo mas alto: $" + df.format(costoM));
+
+        teclado.close();
     }
 }
