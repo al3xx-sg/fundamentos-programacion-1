@@ -38,10 +38,6 @@ public class Main {
                 }
             }
 
-            if (peso == 0) {
-                break;
-            }
-
             do {
                 System.out.println("\n\nSeleccione el tipo de envio:");
                 System.out.println("1.- Local");
